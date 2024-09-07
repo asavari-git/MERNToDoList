@@ -18,7 +18,7 @@ const change = (e) =>{
 }
 const submit = async()=>{
   await axios
-  .put(`http://localhost:1000/api/v2/updateTask/${update._id}`,Inputs)
+  .put(`https://merntodolist-backend-pel4.onrender.com/api/v2/updateTask/${update._id}`,Inputs)
   .then((response)=>{
     //console.log(Inputs);
     toast.success(response.data.message);
