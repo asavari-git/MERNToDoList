@@ -20,7 +20,7 @@ const SignUp = () => {
   const submit = async (e) => {
     e.preventDefault();
     const response = await axios
-      .post("http://localhost:1000/api/v1/register", Inputs)
+      .post("https://merntodolist-backend-pel4.onrender.com/api/v1/register", Inputs)
       .then((response) => {
         console.log(response);
         alert(response.data.message);
