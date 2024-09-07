@@ -23,31 +23,31 @@ const AddTodo = () => {
     const { name, value } = e.target;
     SetInputs({ ...Inputs, [name]: value });
   };
+import { useCallback } from 'react';
 
-  const submit = async () => {
-    console.log(" submit button clicked");
-    console.log(Inputs);
-    if (Inputs.title === "" || Inputs.body === "") {
-      toast.error("tiTle or Details cannot be empty");
-      console.log("in if");
-    } else {
-      await axios
-        .post("https://merntodolist-backend-pel4.onrender.com/api/v2/addTask", {
-          title: Inputs.title,
-          body: Inputs.body,
-          id: id,
-        })
-        .then((response) => {
-          console.log(response);
-          console.log("done");
-        });
+const submit = useCallback(
+  async (e) => {
+    e.preventDefault();
 
-      SetInputs({ title: "", body: "" });
-      toast.success("Task added successfully !");
+    try {
+        const response = await axios.post("https://merntodolist-backend-pel4.onrender.com/api/v1/login", Inputs);
 
-      setArray([...Array, Inputs]);
+        // Safely access the _id
+        if (response.data && response.data.others && response.data.others._id) {
+            sessionStorage.setItem("id", response.data.others._id);
+            dispatch(authActions.login());
+            history('/todo');
+        } else {
+            console.error("Invalid response structure:", response.data);
+        }
+    } catch (error) {
+        console.error("Login failed:", error);
     }
-  };
+  },
+  [Inputs, dispatch, history] // Add any dependencies the function relies on
+);
+
+  
 
   const del = async (Cardid) => {
     if (id) {
