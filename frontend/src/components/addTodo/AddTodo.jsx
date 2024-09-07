@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Update from "./Update";
 import axios from "axios";
 import { useEffect } from "react";
+import { useCallback } from 'react';
 let id = sessionStorage.getItem("id");
 let toUpdateArray = [];
 const AddTodo = () => {
@@ -23,7 +24,7 @@ const AddTodo = () => {
     const { name, value } = e.target;
     SetInputs({ ...Inputs, [name]: value });
   };
-import { useCallback } from 'react';
+
 
 const submit = useCallback(
   async (e) => {
