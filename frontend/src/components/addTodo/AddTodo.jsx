@@ -39,7 +39,7 @@ const AddTodo = () => {
         })
         .then((response) => {
           console.log(response);
-          console.log(done);
+          console.log("done");
         });
 
       SetInputs({ title: "", body: "" });
