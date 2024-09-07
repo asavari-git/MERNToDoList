@@ -31,7 +31,7 @@ const AddTodo = () => {
       toast.error("tiTle or Details cannot be empty");
     } else {
       await axios
-        .post("http://localhost:1000/api/v2/addTask", {
+        .post("https://merntodolist-backend-pel4.onrender.com/api/v2/addTask", {
           title: Inputs.title,
           body: Inputs.body,
           id: id,
@@ -50,7 +50,7 @@ const AddTodo = () => {
   const del = async (Cardid) => {
     if (id) {
       await axios
-        .delete(`http://localhost:1000/api/v2/deleteTask/${Cardid}`, {
+        .delete(`https://merntodolist-backend-pel4.onrender.com/api/v2/deleteTask/${Cardid}`, {
           data: { id: id },
         })
         .then((response) => {
@@ -78,7 +78,7 @@ const AddTodo = () => {
     if (id) {
       const fetch = async () => {
         await axios
-          .get(`http://localhost:1000/api/v2/getTask/${id}`)
+          .get(`https://merntodolist-backend-pel4.onrender.com/api/v2/getTask/${id}`)
           .then((response) => {
             setArray(response.data.list);
           });
