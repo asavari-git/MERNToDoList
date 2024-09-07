@@ -14,7 +14,7 @@ const AddTodo = () => {
   const [Array, setArray] = useState([]);
 
   const show = () => {
-    //console.log("in function show");
+    console.log("in function show");
     document.getElementById("textarea").style.display = "block";
   };
 
@@ -26,9 +26,10 @@ const AddTodo = () => {
 
   const submit = async () => {
     console.log(" submit button clicked");
-    //console.log(Inputs);
+    console.log(Inputs);
     if (Inputs.title === "" || Inputs.body === "") {
       toast.error("tiTle or Details cannot be empty");
+      console.log("in if");
     } else {
       await axios
         .post("https://merntodolist-backend-pel4.onrender.com/api/v2/addTask", {
@@ -38,6 +39,7 @@ const AddTodo = () => {
         })
         .then((response) => {
           console.log(response);
+          console.log(done);
         });
 
       SetInputs({ title: "", body: "" });
