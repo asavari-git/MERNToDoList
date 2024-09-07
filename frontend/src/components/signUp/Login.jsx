@@ -22,7 +22,7 @@ const Login = () => {
       const submit = async (e) => {
         e.preventDefault();
         const response = await axios
-          .post("http://localhost:1000/api/v1/login", Inputs)
+          .post("https://merntodolist-backend-pel4.onrender.com/api/v1/login", Inputs)
           .then((response) => {
            //console.log(response.data.others._id);
            sessionStorage.setItem("id", response.data.others._id);
