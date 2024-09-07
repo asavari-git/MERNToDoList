@@ -1,0 +1,13 @@
+.aboutus{
+    width: 100%;
+    height: 80vh;
+}
+
+.aboutus p{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.about{
+    display: flex;
+}

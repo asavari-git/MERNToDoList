@@ -1,0 +1,74 @@
+//import React from "react";
+import React, { useState, useEffect } from "react";
+import "./Login.css";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import {useDispatch} from "react-redux";
+import {authActions} from "../../store";
+
+const Login = () => {
+    const dispatch = useDispatch();
+    const history = useNavigate();
+    const [Inputs, SetInputs] = useState({
+        email: "",
+        
+        password: ""
+      });
+      const change = (e) => {
+        const { name, value } = e.target;
+        SetInputs({ ...Inputs, [name]: value });
+      };
+    
+      const submit = async (e) => {
+        e.preventDefault();
+        const response = await axios
+          .post("http://localhost:1000/api/v1/login", Inputs)
+          .then((response) => {
+           //console.log(response.data.others._id);
+           sessionStorage.setItem("id", response.data.others._id);
+           dispatch(authActions.login());
+           history('/todo');
+          });
+        //console.log(Inputs);
+      };
+  return (
+    <div>
+      <div className="login">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 d-flex justify-content-center align-items-center ">
+              <div className="d-flex justify-content-center align-items-center">
+                <input
+                  className="email my-3"
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  value={Inputs.email}
+                  onChange={change}
+                />
+
+                <input
+                  className="password my-3"
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  value={Inputs.password}
+                  onChange={change}
+                />
+
+                <button className="btn-login" onClick={submit}>
+                  Login
+                </button>
+              </div>
+            </div>
+            {/* <div className="col-lg-4 d-flex justify-content-center align-items-center">
+                <h1>Sign <br/>Up</h1>
+            </div> */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

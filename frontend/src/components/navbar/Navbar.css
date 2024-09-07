@@ -1,0 +1,13 @@
+
+
+.btn-nav{
+    background-color: rgb(189, 154, 225);
+    border-radius: 5px;
+    border-color: black;
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+}
+}
