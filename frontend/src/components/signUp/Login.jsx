@@ -19,18 +19,27 @@ const Login = () => {
         SetInputs({ ...Inputs, [name]: value });
       };
     
-      const submit = async (e) => {
-        e.preventDefault();
-        const response = await axios
-          .post("https://merntodolist-backend-pel4.onrender.com/api/v1/login", Inputs)
-          .then((response) => {
-           //console.log(response.data.others._id);
-           sessionStorage.setItem("id", response.data.others._id);
-           dispatch(authActions.login());
-           history('/todo');
-          });
-        //console.log(Inputs);
-      };
+     const submit = async (e) => {
+    e.preventDefault();
+
+    try {
+        const response = await axios.post("http://localhost:1000/api/v1/login", Inputs);
+
+        // Safely access the _id
+        if (response.data && response.data.others && response.data.others._id) {
+            sessionStorage.setItem("id", response.data.others._id);
+            dispatch(authActions.login());
+            history('/todo');
+        } else {
+            console.error("Invalid response structure:", response.data);
+            // Handle the case where _id is missing, e.g., show an error message to the user
+        }
+    } catch (error) {
+        console.error("Login failed:", error);
+        // Handle the error, e.g., show an error message to the user
+    }
+};
+
   return (
     <div>
       <div className="login">
