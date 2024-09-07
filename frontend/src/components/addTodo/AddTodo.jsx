@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Update from "./Update";
 import axios from "axios";
 import { useEffect } from "react";
-import { useCallback } from 'react';
+
 let id = sessionStorage.getItem("id");
 let toUpdateArray = [];
 const AddTodo = () => {
@@ -26,27 +26,30 @@ const AddTodo = () => {
   };
 
 
-const submit = useCallback(
-  async (e) => {
-    e.preventDefault();
+const submit = async () => {
+    console.log(" submit button clicked");
+    console.log(Inputs);
+    if (Inputs.title === "" || Inputs.body === "") {
+      toast.error("tiTle or Details cannot be empty");
+      console.log("in if");
+    } else {
+      await axios
+        .post("https://merntodolist-backend-pel4.onrender.com/api/v2/addTask", {
+          title: Inputs.title,
+          body: Inputs.body,
+          id: id,
+        })
+        .then((response) => {
+          console.log(response);
+          console.log("done");
+        });
 
-    try {
-        const response = await axios.post("https://merntodolist-backend-pel4.onrender.com/api/v1/login", Inputs);
+      SetInputs({ title: "", body: "" });
+      toast.success("Task added successfully !");
 
-        // Safely access the _id
-        if (response.data && response.data.others && response.data.others._id) {
-            sessionStorage.setItem("id", response.data.others._id);
-            dispatch(authActions.login());
-            history('/todo');
-        } else {
-            console.error("Invalid response structure:", response.data);
-        }
-    } catch (error) {
-        console.error("Login failed:", error);
+      setArray([...Array, Inputs]);
     }
-  },
-  [Inputs, dispatch, history] // Add any dependencies the function relies on
-);
+  };
 
   
 
