@@ -8,7 +8,7 @@ const auth = require("./routes/auth");
 const list = require("./routes/list");
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin: "*"}));
 
 app.get("/", (req, res) =>{
     res.send("Hello");
