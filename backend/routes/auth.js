@@ -23,11 +23,11 @@ router.post("/login", async(req, res) =>{
     try {
         const user = await User.findOne({ email:req.body.email });
         if (!user) {
-            return res.status(200).json({message: "User not found, Sign up first"});
+            return res.status(400).json({message: "User not found, Sign up first"});
         }
         const matchedPassword = bcrypt.compareSync(req.body.password,user.password)
         if (!matchedPassword) {
-            return res.status(200).json({message: "Invalid password credentials!"});
+            return res.status(400).json({message: "Invalid password credentials!"});
         }
 
         //excluding password get everything
@@ -35,7 +35,7 @@ router.post("/login", async(req, res) =>{
         res.status(200).json({others});
     } catch (error) {
         console.log(error);
-        res.status(200).json({message: "user already exists"});
+        res.status(400).json({message: "user already exists"});
     }
 } );
 
