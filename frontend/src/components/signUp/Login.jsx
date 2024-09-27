@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-        const response = await axios.post("https://merntodolist-backend-pel4.onrender.com//api/v1/login", Inputs);
+        const response = await axios.post("https://merntodolist-backend-pel4.onrender.com/api/v1/login", Inputs);
 
         // Safely access the _id
         if (response.data && response.data.others && response.data.others._id) {
