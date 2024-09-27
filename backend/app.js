@@ -8,8 +8,8 @@ const auth = require("./routes/auth");
 const list = require("./routes/list");
 
 app.use(express.json());
-app.use(cors({origin5: "*"}));
-//app.options('*', cors());
+//app.use(cors({origin5: "*"}));
+app.options('*', cors());
 // app.use(cors({
 //     origin: 'https://merntodolist-frontend.onrender.com', // Your frontend domain
 //     methods: 'GET,POST,PUT,DELETE', // Allowed methods
