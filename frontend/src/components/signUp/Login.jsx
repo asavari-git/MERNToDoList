@@ -32,11 +32,11 @@ const Login = () => {
             history('/todo');
         } else {
             console.error("Invalid response structure:", response.data);
-            // Handle the case where _id is missing, e.g., show an error message to the user
+            // Handle the case where _id is missing
         }
     } catch (error) {
         console.error("Login failed:", error);
-        // Handle the error, e.g., show an error message to the user
+        // Handle the erro
     }
 };
 
